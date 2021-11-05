@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Application.Decorators
 {
     internal class UnitOfWorkCommandHandlerDecorator<TCommand, TResult> :
-        IRequestHandler<TCommand, TResult>
+        ICommandHandler<TCommand, TResult>
         where TCommand : ICommand<TResult>
     {
         private readonly IRequestHandler<TCommand, TResult> _decorated;
