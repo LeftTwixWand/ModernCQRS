@@ -9,9 +9,9 @@ namespace Application.Decorators
         ICommandHandler<TCommand, TResult>
         where TCommand : ICommand<TResult>
     {
-        private readonly UnitOfWorkCommandHandlerDecorator<TCommand, TResult> _decorated;
+        private readonly ICommandHandler<TCommand, TResult> _decorated;
 
-        public UnitOfWorkCommandHandlerDecorator(UnitOfWorkCommandHandlerDecorator<TCommand, TResult> decorated)
+        public UnitOfWorkCommandHandlerDecorator(ICommandHandler<TCommand, TResult> decorated)
         {
             _decorated = decorated;
         }
