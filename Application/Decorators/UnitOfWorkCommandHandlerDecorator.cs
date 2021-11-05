@@ -1,4 +1,5 @@
 ﻿using Application.Commands;
+using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 namespace Application.Decorators
 {
     internal class UnitOfWorkCommandHandlerDecorator<TCommand, TResult> :
-        ICommandHandler<TCommand, TResult>
+        IRequestHandler<TCommand, TResult>
         where TCommand : ICommand<TResult>
     {
-        private readonly ICommandHandler<TCommand, TResult> _decorated;
+        private readonly IRequestHandler<TCommand, TResult> _decorated;
 
-        public UnitOfWorkCommandHandlerDecorator(ICommandHandler<TCommand, TResult> decorated)
+        public UnitOfWorkCommandHandlerDecorator(IRequestHandler<TCommand, TResult> decorated)
         {
             _decorated = decorated;
         }

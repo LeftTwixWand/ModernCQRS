@@ -1,4 +1,5 @@
 ﻿using Application.Queries;
+using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +10,9 @@ namespace Application.Decorators
         IQueryHandler<TQuery, TResult>
         where TQuery : IQuery<TResult>
     {
-        private readonly IQueryHandler<TQuery, TResult> _decorated;
+        private readonly IRequestHandler<TQuery, TResult> _decorated;
 
-        public DiagnosticQueryHandlerDecorator(IQueryHandler<TQuery, TResult> decorated)
+        public DiagnosticQueryHandlerDecorator(IRequestHandler<TQuery, TResult> decorated)
         {
             this._decorated = decorated;
         }
