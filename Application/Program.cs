@@ -1,12 +1,37 @@
-﻿using System;
+﻿using Application.Commands;
+using Application.Decorators;
+using Application.Modules;
+using Application.Processing;
+using Application.Queries;
+using Autofac;
+using MediatR;
+using System.Threading.Tasks;
 
 namespace Application
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var container = ConfigureCQRS();
+            using var scope = container.BeginLifetimeScope();
+
+            var mediatr = scope.Resolve<IMediator>();
+
+            await mediatr.Send(new MyCommand("Command1"));
+            await mediatr.Send(new MyQuery("Query1"));
+        }
+
+        private static IContainer ConfigureCQRS()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterModule(new MediatRModule(typeof(Program).Assembly));
+            builder.RegisterGenericDecorator(typeof(LoggingRequestHandlerDecorator<,>), typeof(IRequestHandler<,>));
+            builder.RegisterGenericDecorator(typeof(UnitOfWorkCommandHandlerDecorator<,>), typeof(ICommandHandler<,>));
+            builder.RegisterGenericDecorator(typeof(DiagnosticQueryHandlerDecorator<,>), typeof(IQueryHandler<,>));
+
+            return builder.Build();
         }
     }
 }
