@@ -1,4 +1,4 @@
-## This repository shows, how to implement CQRS architecture approach, using [Autofac](https://github.com/autofac/Autofac) and [MediatR](https://github.com/jbogard/MediatR) libraries.
+### This repository shows, how to implement CQRS architecture approach, using [Autofac](https://github.com/autofac/Autofac) and [MediatR](https://github.com/jbogard/MediatR) libraries.
 
 The main purpose is to create a simple app with clear CQRS requests processing behavior.
 
