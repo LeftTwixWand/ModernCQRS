@@ -10,4 +10,4 @@ This repository demonstrates how to:
 
 The sample app output:
 
-![CQRS](https://user-images.githubusercontent.com/50652041/151836701-8a6a60c0-acad-4da2-8462-a9589d2f4207.png)
+![CQRS](https://user-images.githubusercontent.com/50652041/152152005-2a74a8fc-ed45-4c06-b707-bcc1f713a7f0.png)
