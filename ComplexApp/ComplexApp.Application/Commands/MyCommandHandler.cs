@@ -1,13 +1,14 @@
 ﻿using BuildingBlocks.Application.Commands;
+using MediatR;
 
 namespace ComplexApp.Application.Commands;
 
-internal sealed class MyCommandHandler : ICommandHandler<MyCommand, string>
+internal sealed class MyCommandHandler : ICommandHandler<MyCommand>
 {
-    public Task<string> Handle(MyCommand command, CancellationToken cancellationToken)
+    public Task<Unit> Handle(MyCommand request, CancellationToken cancellationToken)
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine($"Command Handler result: {command.Text}");
-        return Task.FromResult(command.Text);
+        Console.WriteLine("MyCommandHandler");
+        return Task.FromResult(Unit.Value);
     }
 }

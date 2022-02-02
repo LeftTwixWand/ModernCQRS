@@ -2,4 +2,4 @@
 
 namespace ComplexApp.Application.Commands;
 
-public record MyCommand(string Text) : CommandBase;
+public record MyResultCommand(string Text) : CommandBase<string>;

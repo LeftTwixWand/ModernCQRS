@@ -3,17 +3,17 @@ using SimpleApp.Configuration.Queries;
 
 namespace SimpleApp.Decorators;
 
-internal sealed class DiagnosticQueryHandlerDecorator<TQuery, TResult> : IQueryHandler<TQuery, TResult>
-    where TQuery : IQuery<TResult>
+internal sealed class DiagnosticQueryHandlerDecorator<TRequest, TResult> : IQueryHandler<TRequest, TResult>
+    where TRequest : IQuery<TResult>
 {
-    private readonly IRequestHandler<TQuery, TResult> _decorated;
+    private readonly IRequestHandler<TRequest, TResult> _decorated;
 
-    public DiagnosticQueryHandlerDecorator(IRequestHandler<TQuery, TResult> decorated)
+    public DiagnosticQueryHandlerDecorator(IRequestHandler<TRequest, TResult> decorated)
     {
         _decorated = decorated;
     }
 
-    public async Task<TResult> Handle(TQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> Handle(TRequest query, CancellationToken cancellationToken)
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("DiagnosticQueryHandlerDecorator start");

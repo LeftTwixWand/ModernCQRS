@@ -3,25 +3,25 @@ using SimpleApp.Configuration.Commands;
 
 namespace SimpleApp.Decorators;
 
-internal sealed class UnitOfWorkCommandHandlerDecorator<TCommand, TResult> : ICommandHandler<TCommand, TResult>
-    where TCommand : ICommand<TResult>
+internal sealed class UnitOfWorkCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
+    where TCommand : CommandBase
 {
-    private readonly IRequestHandler<TCommand, TResult> _decorated;
+    private readonly IRequestHandler<TCommand> _decorated;
 
-    public UnitOfWorkCommandHandlerDecorator(IRequestHandler<TCommand, TResult> decorated)
+    public UnitOfWorkCommandHandlerDecorator(IRequestHandler<TCommand> decorated)
     {
         _decorated = decorated;
     }
 
-    public async Task<TResult> Handle(TCommand command, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
     {
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("UnitOfWorkCommandHandlerDecorator start");
 
-        var result = await _decorated.Handle(command, cancellationToken);
+        await _decorated.Handle(command, cancellationToken);
 
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("UnitOfWorkCommandHandlerDecorator end");
-        return result;
+        return Unit.Value;
     }
 }

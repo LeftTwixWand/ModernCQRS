@@ -15,10 +15,10 @@ public class MediatorModule : Module
 
         var openHandlerTypes = new[]
         {
-                typeof(IRequestHandler<,>),
-                typeof(INotificationHandler<>),
-                typeof(IValidator<>),
-            };
+            typeof(IRequestHandler<,>),
+            typeof(INotificationHandler<>),
+            typeof(IValidator<>),
+        };
 
         foreach (var openHandlerType in openHandlerTypes)
         {

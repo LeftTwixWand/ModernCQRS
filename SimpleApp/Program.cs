@@ -1,19 +1,23 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Autofac;
+﻿using Autofac;
 using MediatR;
-using SimpleApp.CQRSRequests;
+using SimpleApp.Commands;
 using SimpleApp.Modules;
+using SimpleApp.Queries;
 
 var container = ConfigureDIContainer();
 using var scope = container.BeginLifetimeScope();
 
 var mediatr = scope.Resolve<IMediator>();
 
-await mediatr.Send(new MyCommand("Command1"));
+await mediatr.Send(new MyCommand("MyCommand"));
 
 Console.WriteLine();
 
-await mediatr.Send(new MyQuery("Query1"));
+var myResultCommand = await mediatr.Send(new MyResultCommand("MyResultCommand"));
+
+Console.WriteLine();
+
+var myQuery = await mediatr.Send(new MyQuery("MyQuery"));
 
 Console.ForegroundColor = ConsoleColor.White;
 

@@ -9,11 +9,15 @@ using var scope = container.BeginLifetimeScope();
 
 var mediatr = scope.Resolve<IMediator>();
 
-await mediatr.Send(new MyCommand("Command1"));
+await mediatr.Send(new MyCommand("MyCommand"));
 
 Console.WriteLine();
 
-await mediatr.Send(new MyQuery("Query1"));
+var myResultCommand = await mediatr.Send(new MyResultCommand("MyResultCommand"));
+
+Console.WriteLine();
+
+var myQuery = await mediatr.Send(new MyQuery("MyQuery"));
 
 Console.ForegroundColor = ConsoleColor.White;
 
