@@ -7,7 +7,7 @@ internal sealed class MyResultCommandHandler : ICommandHandler<MyResultCommand, 
     public Task<string> Handle(MyResultCommand command, CancellationToken cancellationToken)
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("MyResultCommandHandler");
+        Console.WriteLine("CommandHandler with result");
         return Task.FromResult(command.Text);
     }
 }
