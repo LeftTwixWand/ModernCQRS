@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using BuildingBlocks.Application.Requests;
+using MediatR;
 
 namespace ComplexApp.Infrastructure.Decorators;
 
 internal sealed class LoggingRequestHandlerDecorator<TRequest, TResult> : IRequestHandler<TRequest, TResult>
-        where TRequest : IRequest<TResult>
+        where TRequest : IIdentifiableRequest<TResult>
 {
     private readonly IRequestHandler<TRequest, TResult> _decorated;
 
@@ -15,12 +16,12 @@ internal sealed class LoggingRequestHandlerDecorator<TRequest, TResult> : IReque
     public async Task<TResult> Handle(TRequest request, CancellationToken cancellationToken)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("LoggingRequestHandlerDecorator start");
+        Console.WriteLine($"LoggingRequestHandlerDecorator start. Request id: {request.RequestId}");
 
         var result = await _decorated.Handle(request, cancellationToken);
 
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("LoggingRequestHandlerDecorator end");
+        Console.WriteLine($"LoggingRequestHandlerDecorator end. Request id: {request.RequestId}");
         return result;
     }
 }

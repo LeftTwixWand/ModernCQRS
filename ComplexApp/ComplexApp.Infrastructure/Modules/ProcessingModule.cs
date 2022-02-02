@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BuildingBlocks.Application.Commands;
 using ComplexApp.Infrastructure.Decorators;
 using ComplexApp.Infrastructure.Pipelines;
 using MediatR;
@@ -14,8 +15,7 @@ public class ProcessingModule : Module
         builder.RegisterGeneric(typeof(ValidationRequestPreProcessor<>)).As(typeof(IRequestPreProcessor<>));
         builder.RegisterGeneric(typeof(MyCustomRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));
 
-        builder.RegisterGenericDecorator(typeof(UnitOfWorkCommandHandlerDecorator<>), typeof(IRequestHandler<,>));
-        builder.RegisterGenericDecorator(typeof(UnitOfWorkCommandHandlerWithResultDecorator<,>), typeof(IRequestHandler<,>));
+        builder.RegisterGenericDecorator(typeof(UnitOfWorkCommandHandlerDecorator<,>), typeof(IRequestHandler<,>));
         builder.RegisterGenericDecorator(typeof(DiagnosticQueryHandlerDecorator<,>), typeof(IRequestHandler<,>));
         builder.RegisterGenericDecorator(typeof(LoggingRequestHandlerDecorator<,>), typeof(IRequestHandler<,>));
     }
