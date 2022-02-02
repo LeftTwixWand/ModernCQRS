@@ -11,3 +11,7 @@ This repository demonstrates how to:
 The sample app output:
 
 ![CQRS](https://user-images.githubusercontent.com/50652041/152152005-2a74a8fc-ed45-4c06-b707-bcc1f713a7f0.png)
+
+
+### The Commands / Queries relation diagram
+![CQRS](https://user-images.githubusercontent.com/50652041/152162222-4a38f4aa-7a93-4d51-907a-a5b0b5cca518.jpg)
