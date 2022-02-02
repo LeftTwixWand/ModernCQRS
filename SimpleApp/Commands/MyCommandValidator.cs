@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
-namespace SimpleApp.CQRSRequests;
+namespace SimpleApp.Commands;
 
-internal class MyCommandValidator : AbstractValidator<MyCommand>
+internal sealed class MyCommandValidator : AbstractValidator<MyCommand>
 {
     public MyCommandValidator()
     {
