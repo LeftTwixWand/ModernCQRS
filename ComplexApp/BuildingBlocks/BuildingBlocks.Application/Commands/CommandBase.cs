@@ -1,36 +1,19 @@
-﻿namespace BuildingBlocks.Application.Commands;
+﻿using BuildingBlocks.Application.Requests;
+using MediatR;
 
-public record CommandBase : ICommand
+namespace BuildingBlocks.Application.Commands;
+
+/// <summary>
+/// Abstract record, that encapsulate functionality of <see cref="ICommand"/> and adding request identity.
+/// </summary>
+public record CommandBase : CommandBase<Unit>, ICommand
 {
-    public Guid Id { get; private set; }
-
-    public CommandBase()
-    {
-        Id = Guid.NewGuid();
-    }
-
-    protected CommandBase(Guid id)
-    {
-        Id = id;
-    }
 }
 
 /// <summary>
-/// An abstract class, that incapsulate functional of <see cref="ICommand{TResult}"/>
-/// <para/><typeparamref name="TResult"/> is the type of an object, that will be returned as the result of the command execution
+/// Abstract record, that encapsulate functionality of <see cref="ICommand{TResult}"/> and adding request identity.
 /// </summary>
-/// <typeparam name="TResult"> The type of object, that will be returned as the resilt of command execution</typeparam>
-public abstract record CommandBase<TResult> : ICommand<TResult>
+/// <typeparam name="TResult"><inheritdoc cref="RequestBase{TResult}" path="/typeparam"/></typeparam>
+public record CommandBase<TResult> : RequestBase<TResult>, ICommand<TResult>
 {
-    public Guid Id { get; private set; }
-
-    protected CommandBase()
-    {
-        Id = Guid.NewGuid();
-    }
-
-    protected CommandBase(Guid id)
-    {
-        Id = id;
-    }
 }
