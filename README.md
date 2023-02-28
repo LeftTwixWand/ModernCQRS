@@ -3,10 +3,11 @@
 The main purpose is to create a simple app with clear CQRS requests processing behavior.
 
 This repository demonstrates how to:
-- Configure CQRS in .NET app project
-- Add Commands / Queries and its handlers
-- Add Request's, Command's and Queries decorators
-- Add Request's PreProcessors and PostProcessors
+ - How to set up the **MediatR**
+ - How to create custom **Commands** / **Queries** and its handlers
+ - How to add **decorators** for all types of request handlers
+ - How to add **decorators** only for Command or Query handlers
+ - How to use **pipelines**
 
 The sample app output:
 
