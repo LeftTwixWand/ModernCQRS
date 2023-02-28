@@ -1,4 +1,4 @@
-﻿using SimpleApp.Configuration.Requests;
+﻿using MediatR;
 
 namespace SimpleApp.Configuration.Queries;
 
@@ -7,6 +7,6 @@ namespace SimpleApp.Configuration.Queries;
 /// <para><see href="https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs">Read more about CQRS</see>.</para>
 /// </summary>
 /// <typeparam name="TResult">Type of the object, that will be returned as the command execution result.</typeparam>
-public interface IQuery<out TResult> : IIdentifiableRequest<TResult>
+public interface IQuery<out TResult> : IRequest<TResult>
 {
 }

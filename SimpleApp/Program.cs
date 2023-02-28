@@ -1,32 +1,49 @@
 ﻿using Autofac;
 using MediatR;
-using SimpleApp.Commands;
-using SimpleApp.Modules;
+using MediatR.Extensions.Autofac.DependencyInjection.Builder;
+using MediatR.Extensions.Autofac.DependencyInjection;
 using SimpleApp.Queries;
+using MediatR.Pipeline;
+using SimpleApp.Decorators;
+using SimpleApp.Pipelines;
+using SimpleApp.Commands.ProcessPayment;
+using SimpleApp.Commands.UpdatePrice;
 
 var container = ConfigureDIContainer();
 using var scope = container.BeginLifetimeScope();
 
-var mediatr = scope.Resolve<IMediator>();
+var mediator = scope.Resolve<IMediator>();
 
-var commandResult = await mediatr.Send(new MyResultCommand("MyResultCommand"));
-
-Console.WriteLine();
-
-await mediatr.Send(new MyCommand("MyCommand"));
+var commandResult = await mediator.Send(new ProcessPaymentCommand(Guid.NewGuid(), "Credit payment"));
 
 Console.WriteLine();
 
-var queryResult = await mediatr.Send(new MyQuery("MyQuery"));
+await mediator.Send(new UpdatePriceCommand(30));
 
-Console.ForegroundColor = ConsoleColor.White;
+Console.WriteLine();
+
+var queryResult = await mediator.Send(new GetProductsCountQuery("MyQuery"));
 
 static IContainer ConfigureDIContainer()
 {
     var builder = new ContainerBuilder();
 
-    builder.RegisterModule<MediatorModule>();
-    builder.RegisterModule<ProcessingModule>();
+    var configuration = MediatRConfigurationBuilder
+            .Create(typeof(ProcessPaymentCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .Build();
+
+    builder.RegisterMediatR(configuration);
+
+    builder.RegisterGeneric(typeof(ValidationRequestPreProcessor<>)).As(typeof(IRequestPreProcessor<>));
+    builder.RegisterGeneric(typeof(MetricsRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));
+
+    builder.RegisterGenericDecorator(typeof(UnitOfWorkCommandHandlerDecorator<>), typeof(IRequestHandler<>));
+    builder.RegisterGenericDecorator(typeof(LoggingRequestHandlerDecorator<>), typeof(IRequestHandler<>));
+
+    builder.RegisterGenericDecorator(typeof(UnitOfWorkCommandHandlerDecorator<,>), typeof(IRequestHandler<,>));
+    builder.RegisterGenericDecorator(typeof(DiagnosticQueryHandlerDecorator<,>), typeof(IRequestHandler<,>));
+    builder.RegisterGenericDecorator(typeof(LoggingRequestHandlerDecorator<,>), typeof(IRequestHandler<,>));
 
     return builder.Build();
 }

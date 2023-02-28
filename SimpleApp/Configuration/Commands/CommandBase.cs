@@ -1,19 +1,14 @@
-﻿using MediatR;
-using SimpleApp.Configuration.Requests;
+﻿using SimpleApp.Configuration.Requests;
 
 namespace SimpleApp.Configuration.Commands;
 
 /// <summary>
 /// Abstract record, that encapsulate functionality of <see cref="ICommand"/> and adding request identity.
 /// </summary>
-public record CommandBase : CommandBase<Unit>, ICommand
-{
-}
+public abstract record CommandBase : RequestBase, ICommand;
 
 /// <summary>
 /// Abstract record, that encapsulate functionality of <see cref="ICommand{TResult}"/> and adding request identity.
 /// </summary>
 /// <typeparam name="TResult"><inheritdoc cref="RequestBase{TResult}" path="/typeparam"/></typeparam>
-public record CommandBase<TResult> : RequestBase<TResult>, ICommand<TResult>
-{
-}
+public abstract record CommandBase<TResult> : RequestBase<TResult>, ICommand<TResult>;

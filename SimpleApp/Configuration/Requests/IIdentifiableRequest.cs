@@ -3,19 +3,23 @@
 namespace SimpleApp.Configuration.Requests;
 
 /// <summary>
-/// Add unique identifyier for request.
+/// Adds unique identifier for request.
 /// </summary>
-public interface IIdentifiableRequest<out TRequest> : IRequest<TRequest>
+public interface IIdentifiableRequest : IRequest
 {
     /// <summary>
-    /// Unique identifyier of request.
+    /// Unique identifier of request.
     /// </summary>
     Guid RequestId { get; }
 }
 
 /// <summary>
-/// Add unique identifyier for request.
+/// Adds unique identifier for request.
 /// </summary>
-public interface IIdentifiableRequest : IIdentifiableRequest<Unit>
+public interface IIdentifiableRequest<TResult> : IRequest<TResult>
 {
+    /// <summary>
+    /// Unique identifier of request.
+    /// </summary>
+    Guid RequestId { get; }
 }

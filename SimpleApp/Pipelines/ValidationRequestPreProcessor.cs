@@ -17,7 +17,8 @@ internal sealed class ValidationRequestPreProcessor<TRequest> : IRequestPreProce
     public Task Process(TRequest request, CancellationToken cancellationToken)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("ValidationRequestPreProcessor");
+
+        Console.Write("ValidationRequestPreProcessor: ");
 
         var errors = _validators
             .Select(validator => validator.Validate(request))
@@ -35,6 +36,8 @@ internal sealed class ValidationRequestPreProcessor<TRequest> : IRequestPreProce
 
             throw new Exception(errorBuilder.ToString());
         }
+
+        Console.WriteLine("Validation processed successfully.");
 
         return Task.CompletedTask;
     }

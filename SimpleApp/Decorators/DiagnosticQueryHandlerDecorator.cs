@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using SimpleApp.Configuration.Queries;
+using System.Diagnostics;
 
 namespace SimpleApp.Decorators;
 
@@ -16,12 +17,18 @@ internal sealed class DiagnosticQueryHandlerDecorator<TRequest, TResult> : IQuer
     public async Task<TResult> Handle(TRequest query, CancellationToken cancellationToken)
     {
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("DiagnosticQueryHandlerDecorator start");
+
+        Stopwatch stopWatch = Stopwatch.StartNew();
+
+        Console.WriteLine("DiagnosticQueryHandlerDecorator: Started");
 
         var result = await _decorated.Handle(query, cancellationToken);
 
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("DiagnosticQueryHandlerDecorator end");
+
+        stopWatch.Stop();
+        Console.WriteLine($"DiagnosticQueryHandlerDecorator: Operation completed in {stopWatch.ElapsedTicks}ms");
+
         return result;
     }
 }
