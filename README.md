@@ -1,4 +1,4 @@
-### This repository shows, how to implement CQRS architecture approach, using [Autofac](https://github.com/autofac/Autofac) and [MediatR](https://github.com/jbogard/MediatR) libraries.
+## This repository shows, how to implement CQRS architecture approach, using [MediatR](https://github.com/jbogard/MediatR) library.
 
 The main purpose is to create a simple app with clear CQRS requests processing behavior.
 
@@ -10,8 +10,7 @@ This repository demonstrates how to:
 
 The sample app output:
 
-![CQRS](https://user-images.githubusercontent.com/50652041/152152005-2a74a8fc-ed45-4c06-b707-bcc1f713a7f0.png)
+![Output](https://user-images.githubusercontent.com/50652041/221921311-cffbd848-5e7a-4841-9f30-99dd5aa8b24c.png)
 
-
-### The Commands / Queries relation diagram
+### The architecture [OBSOLETE - needs to be updated to MediatR 12.0]
 ![CQRS](https://user-images.githubusercontent.com/50652041/152162222-4a38f4aa-7a93-4d51-907a-a5b0b5cca518.jpg)
