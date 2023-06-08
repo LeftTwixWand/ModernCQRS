@@ -3,11 +3,11 @@
 The main purpose is to create a simple app with clear CQRS requests processing behavior.
 
 This repository demonstrates how to:
- - How to set up the **MediatR**
- - How to create custom **Commands** / **Queries** and its handlers
- - How to add **decorators** for all types of request handlers
- - How to add **decorators** only for Command or Query handlers
- - How to use **pipelines**
+ - Set up the **MediatR**
+ - Create custom **Commands** / **Queries** and its handlers
+ - Add **decorators** for all types of request handlers
+ - Add **decorators** only for Command or Query handlers
+ - Use **pipelines** (**MediatR** Behaviours like request Pre Processors and Post Processors)
 
 The sample app output:
 
