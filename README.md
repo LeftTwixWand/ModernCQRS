@@ -13,7 +13,7 @@ The sample app output:
 
 ![Output](https://user-images.githubusercontent.com/50652041/221921311-cffbd848-5e7a-4841-9f30-99dd5aa8b24c.png)
 
-### The architecture [OBSOLETE - needs to be updated to MediatR 12.0]
+### The architecture
 
 ```mermaid
 flowchart TD
